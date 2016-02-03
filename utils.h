@@ -1,5 +1,7 @@
-#define REPORTING_N 1000000
+#include "sys/types.h"
+//#include "sys/sysinfo.h"
 #define LINEBUFLEN 1024
+#define REPORTING_N 1000000
 
 typedef unsigned long byteoffset;
 typedef unsigned int  entrycount;
@@ -22,6 +24,14 @@ typedef struct {
     unsigned long  knows_id;
     unsigned char  score;
 } Result;
+
+//struct sysinfo memInfo;
+
+//long long get_ram(){
+  //sysinfo (&memInfo);
+ // long long virtualMemUsed = memInfo.totalram - memInfo.freeram;
+  //return virtualMemUsed;
+//}
 
 void parse_csv(char* fname, void (*line_handler)(unsigned char nfields, char** fieldvals)) {
 	long nlines = 0;
@@ -61,7 +71,8 @@ void parse_csv(char* fname, void (*line_handler)(unsigned char nfields, char** f
 
 FILE* open_binout(char* filename) {
 	FILE* outfile;
-	outfile = fopen(filename, "wb");
+  remove(filename);
+	outfile = fopen(filename, "ab+");
 	if (outfile == NULL) {
 		fprintf(stderr, "Could not open %s for writing\n", filename);
 		exit(-1);

@@ -33,7 +33,6 @@ getdata3000:
 run100:
 	echo "Running reorg" > time.txt
 	{ time ./reorg dataset-sf100 ; } 2>> time.txt
-	mv dataset-sf100/person2.bin dataset-sf100/person.bin
 	mv dataset-sf100/knows2.bin dataset-sf100/knows.bin
 	echo "\nRunning queries" >> time.txt
 	{ time ./cruncher dataset-sf100 queries-test.csv out.csv ; } 2>> time.txt
@@ -44,7 +43,6 @@ run100:
 run3000:
 	echo "Running reorg" > time.txt
 	{ time ./reorg dataset-sf3000 ; } 2>> time.txt
-	mv dataset-sf3000/person2.bin dataset-sf3000/person.bin
 	mv dataset-sf3000/knows2.bin dataset-sf3000/knows.bin
 	echo "\nRunning queries" >> time.txt
 	{ time ./cruncher dataset-sf3000 queries-test.csv out.csv ; } 2>> time.txt
